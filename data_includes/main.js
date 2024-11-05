@@ -92,7 +92,7 @@ newTrial(
         .add(100, 20, newImage("rutgers.jpg").size("60%", "auto"))
         .add(0, 150, getText("instr-body"))
         .add(200, 300, getImage('lamp'))
-        .add(200, 500, getScale("scale"))
+        .add(100, 500, getScale("scale"))
         .cssContainer(pageCss)
         .print()
     ,
@@ -115,7 +115,7 @@ Template("NormingDataSource.csv", (row) =>
             .size((row.width / row.height) * 200, 200)
         ,
 
-        newText("Question", "Bu, bir " + row.Noun_TR + " için ne kadar tipik?")
+        newText("Question", "Resimdeki " + row.Noun_TR +  " bir " + row.Noun_TR + " için ne kadar tipik?")
             .center()
             .css("font-size", "14pt")
             .css("margin","1.5em")
@@ -147,7 +147,7 @@ Template("NormingDataSource.csv", (row) =>
         newCanvas("Rating", 800, 500)
             .add("center at 50%", "middle at 0%", getImage("Image"))
             .add("center at 50%", "middle at 30%", getText("Question"))
-            .add("center at 50%", "middle at 40%", getScale("scale"))
+            .add("center at 50%", "middle at 45%", getScale("scale"))
             .print("center at 50vw", "middle at 50vh")
         ,
 

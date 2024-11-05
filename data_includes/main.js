@@ -69,12 +69,26 @@ newTrial(
         "<p> Örneğin, aşağıdaki resim size gösterildikten sonra bir lamba için ne kadar tipik olduğu sorulabilir:</p>"
     ),
     newImage('lamp',"lamp.jpeg").size(200,200).center(),
-    newScale("scale", "0", "1", "2", "3", "4", "5", "6", "7")
-        .labelsPosition("top")
-        .before(newText("tipik değil"))
-        .after(newText("gayet tipik"))
-        .print()
-        .center(),
+    newText("scale_left", "hiç tipik değil")
+            .css("margin-left", "1em")
+            .css("margin-top", "2.5em")
+        ,
+        newText("scale_right", "fazlasıyla tipik")
+            .css("margin-right", "1em")
+            .css("margin-top", "2.5em")
+        ,
+        newScale("scale", "1","2","3","4","5","6","7")
+            .labelsPosition("top")
+            .keys()
+            .before(getText("scale_left"))
+            .after(getText("scale_right"))
+            .center()
+            .bold()
+            .css("margin", "10pt")
+            .cssContainer("border", "solid 1px black")
+            .log()
+            .print()
+        ,
     newCanvas("instr-page", 600, 550)
         .add(100, 20, newImage("rutgers.jpg").size("60%", "auto"))
         .add(0, 150, getText("instr-body"))
@@ -112,7 +126,7 @@ Template("NormingDataSource.csv", (row) =>
             .css("margin-right", "1em")
             .css("margin-top", "2.5em")
         ,
-        newScale("7pt", "1","2","3","4","5","6","7")
+        newScale("scale", "1","2","3","4","5","6","7")
             .labelsPosition("top")
             .keys()
             .before(getText("scale_left"))
@@ -129,7 +143,7 @@ Template("NormingDataSource.csv", (row) =>
         newCanvas("Rating", 800, 500)
             .add("center at 50%", "middle at 0%", getImage("Image"))
             .add("center at 50%", "middle at 30%", getText("Question"))
-            .add("center at 50%", "middle at 40%", getScale("7pt"))
+            .add("center at 50%", "middle at 40%", getScale("scale"))
             .print("center at 50vw", "middle at 50vh"),
 
         getScale("scale").wait(),

@@ -91,8 +91,8 @@ newTrial(
     newCanvas("instr-page", 600, 550)
         .add(100, 20, newImage("rutgers.jpg").size("60%", "auto"))
         .add(0, 150, getText("instr-body"))
-        .add(0, 300, getImage('lamp'))
-        .add(0, 500, getScale("scale"))
+        .add(200, 300, getImage('lamp'))
+        .add(200, 500, getScale("scale"))
         .cssContainer(pageCss)
         .print()
     ,

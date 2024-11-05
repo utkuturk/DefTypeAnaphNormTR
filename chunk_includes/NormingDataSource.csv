@@ -1,33 +1,33 @@
-﻿Item,Type,Group,Condition,Image1,width,height,Category_DE,Noun_DE,Category_EN,Noun_EN
-1,critical,A,1,cake1.jpeg,225,225,Backwaren,einen Kuchen,baked goods,cake
-1,critical,B,2,cake2.jpeg,300,300,Backwaren,einen Kuchen,baked goods,cake
-2,critical,B,1,cookie1.jpeg,300,300,Backwaren,einen Keks,baked goods,cookie
-2,critical,A,2,cookie2.jpeg,300,300,Backwaren,einen Keks,baked goods,cookie
-3,critical,A,1,bread1.jpeg,300,168,Backwaren,ein Brot,baked goods,bread
-3,critical,B,2,bread2.jpeg,300,168,Backwaren,ein Brot,baked goods,bread
-4,critical,B,1,car1.jpeg,300,300,Fahrzeuge,ein Auto,vehicles,car
-4,critical,A,2,car2.jpeg,500,300,Fahrzeuge,ein Auto,vehicles,car
-5,critical,A,1,truck1.jpeg,259,194,Fahrzeuge,einen Laster,vehicles,truck
-5,critical,B,2,truck2.jpeg,259,194,Fahrzeuge,einen Laster,vehicles,truck
-6,critical,B,1,bus1.jpeg,276,183,Fahrzeuge,einen Reisebus,vehicles,bus
-6,critical,A,2,bus2.jpeg,275,183,Fahrzeuge,einen Reisebus,vehicles,bus
-7,critical,A,1,coat1.jpeg,300,300,Kleidungsstuecke,einen Mantel,clothes,coat
-7,critical,B,2,coat2.jpeg,300,300,Kleidungsstuecke,einen Mantel,clothes,coat
-8,critical,B,1,shoe1.jpeg,300,300,Kleidungsstuecke,einen Schuh,clothes,shoe
-8,critical,A,2,shoe2.jpeg,300,300,Kleidungsstuecke,einen Schuh,clothes,shoe
-9,critical,A,1,hat1.jpeg,225,225,Kleidungsstuecke,einen Hut,clothes,hat
-9,critical,B,2,hat2.jpeg,500,300,Kleidungsstuecke,einen Hut,clothes,hat
-10,critical,B,1,chair1.jpeg,500,300,Moebel,einen Stuhl,furniture,chair
-10,critical,A,2,chair2.jpeg,300,300,Moebel,einen Stuhl,furniture,chair
-11,critical,A,1,table1.jpeg,1048,618,Moebel,einen Tisch,furniture,table
-11,critical,B,2,table2.jpeg,343,147,Moebel,einen Tisch,furniture,table
-12,critical,B,1,couch1.jpeg,225,225,Moebel,ein Sofa,furniture,couch
-12,critical,A,2,couch2.jpeg,259,194,Moebel,ein Sofa,furniture,couch
-13,critical,A,1,bird1.jpeg,274,184,Tiere,einen Vogel,animals,bird
-13,critical,B,2,bird2.jpeg,274,184,Tiere,einen Vogel,animals,bird
-14,critical,B,1,dog1.jpeg,300,300,Tiere,einen Hund,animals,dog
-14,critical,A,2,dog2.jpeg,300,300,Tiere,einen Hund,animals,dog
-15,critical,A,1,fish1.jpeg,319,158,Tiere,einen Fisch,animals,fish
-15,critical,B,2,fish2.jpeg,299,168,Tiere,einen Fisch,animals,fish
-16,critical,B,1,horse1.jpeg,225,225,Tiere,ein Pferd,animals,horse
-16,critical,A,2,horse2.jpeg,264,191,Tiere,ein Pferd,animals,horse
+﻿Item,Type,Group,Condition,Image1,width,height,Category_DE,Noun_DE,Category_EN,Noun_EN,Category_TR, Noun_TR
+1,critical,A,1,cake1.jpeg,225,225,Backwaren,einen Kuchen,baked goods,cake, unlu mamül, kek
+1,critical,B,2,cake2.jpeg,300,300,Backwaren,einen Kuchen,baked goods,cake, unlu mamül, kek
+2,critical,B,1,cookie1.jpeg,300,300,Backwaren,einen Keks,baked goods,cookie, unlu mamül, kurabiye
+2,critical,A,2,cookie2.jpeg,300,300,Backwaren,einen Keks,baked goods,cookie, unlu mamül, kurabiye
+3,critical,A,1,bread1.jpeg,300,168,Backwaren,ein Brot,baked goods,bread, unlu mamül, ekmek
+3,critical,B,2,bread2.jpeg,300,168,Backwaren,ein Brot,baked goods,bread, unlu mamül, ekmek
+4,critical,B,1,car1.jpeg,300,300,Fahrzeuge,ein Auto,vehicles,car, araç, araba
+4,critical,A,2,car2.jpeg,500,300,Fahrzeuge,ein Auto,vehicles,car, araç, araba
+5,critical,A,1,truck1.jpeg,259,194,Fahrzeuge,einen Laster,vehicles,truck, araç, kamyon
+5,critical,B,2,truck2.jpeg,259,194,Fahrzeuge,einen Laster,vehicles,truck, araç, kamyon
+6,critical,B,1,bus1.jpeg,276,183,Fahrzeuge,einen Reisebus,vehicles,bus, araç, otobüs
+6,critical,A,2,bus2.jpeg,275,183,Fahrzeuge,einen Reisebus,vehicles,bus, araç, otobüs
+7,critical,A,1,coat1.jpeg,300,300,Kleidungsstuecke,einen Mantel,clothes,coat, giysi, palto
+7,critical,B,2,coat2.jpeg,300,300,Kleidungsstuecke,einen Mantel,clothes,coat, giysi, palto
+8,critical,B,1,shoe1.jpeg,300,300,Kleidungsstuecke,einen Schuh,clothes,shoe, giysi, ayakkabı
+8,critical,A,2,shoe2.jpeg,300,300,Kleidungsstuecke,einen Schuh,clothes,shoe, giysi, ayakkabı
+9,critical,A,1,hat1.jpeg,225,225,Kleidungsstuecke,einen Hut,clothes,hat, giysi, şapka
+9,critical,B,2,hat2.jpeg,500,300,Kleidungsstuecke,einen Hut,clothes,hat, giysi, şapka
+10,critical,B,1,chair1.jpeg,500,300,Moebel,einen Stuhl,furniture,chair, mobilya, sandalye
+10,critical,A,2,chair2.jpeg,300,300,Moebel,einen Stuhl,furniture,chair, mobilya, sandalye
+11,critical,A,1,table1.jpeg,1048,618,Moebel,einen Tisch,furniture,table, mobilya, masa
+11,critical,B,2,table2.jpeg,343,147,Moebel,einen Tisch,furniture,table, mobilya, masa
+12,critical,B,1,couch1.jpeg,225,225,Moebel,ein Sofa,furniture,couch, mobilya, kanepe
+12,critical,A,2,couch2.jpeg,259,194,Moebel,ein Sofa,furniture,couch, mobilya, kanepe
+13,critical,A,1,bird1.jpeg,274,184,Tiere,einen Vogel,animals,bird, hayvan, kuş
+13,critical,B,2,bird2.jpeg,274,184,Tiere,einen Vogel,animals,bird, hayvan, kuş
+14,critical,B,1,dog1.jpeg,300,300,Tiere,einen Hund,animals,dog, hayvan, köpek
+14,critical,A,2,dog2.jpeg,300,300,Tiere,einen Hund,animals,dog, hayvan, köpek
+15,critical,A,1,fish1.jpeg,319,158,Tiere,einen Fisch,animals,fish, hayvan, balık
+15,critical,B,2,fish2.jpeg,299,168,Tiere,einen Fisch,animals,fish, hayvan, balık
+16,critical,B,1,horse1.jpeg,225,225,Tiere,ein Pferd,animals,horse, hayvan, at
+16,critical,A,2,horse2.jpeg,264,191,Tiere,ein Pferd,animals,horse, hayvan, at

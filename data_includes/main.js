@@ -43,60 +43,61 @@ Sequence("consent", "instructions", randomize("ratings"), SendResults(), "end")
 ,
 
 newTrial(
-    "consent",
+    "consent"
+    ,
     newText(
         "consent-body",
         "<center><b>Deney Onay Formu</b></center>" +
         "<p>Lütfen <a target='_blank' rel='noopener noreferrer' href='https://utkuturk.com/files/web_consent.pdf'>bu linke</a> tıklayarak onay formunu indirip inceleyiniz. Bu onay formunu okuyup bu çalışmaya katılmayı kabul ediyorsanız, aşağıdaki 'Kabul Ediyorum' butonuna tıklayın. Bu çalışmaya katılmayı kabul etmiyorsanız, sekmeyi kapatarak bu çalışmadan çıkabilirsiniz. Deney sırasında istediğiniz zaman sekmeyi kapatarak deneyden çıkabilirsiniz. Eğer deneyi tamamlamadan çıkarsanız, zamanınız için herhangi bir ödeme yapılmayacaktır. Herhangi bir sorunla karşılaşırsanız, lütfen bizimle e-posta yoluyla iletişime geçmekten çekinmeyin." +
         "<br><br><b> Araştırmacılar:</b> <br>Yağmur Sağ, University of Rutgers <i> (yagmursag@gmail.com)</i> ,<br>Utku Turk, University of Maryland, College Park <i> (utkuturk@umd.edu)</i>"
-    ),
+    )
+    ,
     newCanvas("consent-page", 600, 400)
         .add(100, 20, newImage("rutgers.jpg").size("60%", "auto"))
         .add(0, 150, getText("consent-body"))
         .cssContainer(pageCss)
-        .print(),
-    newText("<p>").print(),
+        .print()
+    ,
+    newText("<p>").print()
+    ,
     newButton("agree", "Kabul Ediyorum").bold().css(buttonCss).print().wait()
 )
 
 ,
 
 newTrial(
-    "instructions",
+    "instructions"
+    ,
     newText("instr-body",
         "Merhaba!" +
         "<p> Bu deneyde sizden gösterilen nesnelerin ne kadar tipik olduğunu değerlendirmeniz istenmektedir.</p>" +
         "<p> Örneğin, aşağıdaki resim size gösterildikten sonra bir lamba için ne kadar tipik olduğu sorulabilir:</p>"
-    ),
-    newImage('lamp',"lamp.jpeg").size(200,200).center(),
-    newText("scale_left", "hiç tipik değil")
-            .css("margin-left", "1em")
-            .css("margin-top", "2.5em")
-        ,
-        newText("scale_right", "fazlasıyla tipik")
-            .css("margin-right", "1em")
-            .css("margin-top", "2.5em")
-        ,
-        newScale("scale", "1","2","3","4","5","6","7")
-            .labelsPosition("top")
-            .keys()
-            .before(getText("scale_left"))
-            .after(getText("scale_right"))
-            .center()
-            .bold()
-            .css("margin", "10pt")
-            .cssContainer("border", "solid 1px black")
-            .log()
-            .print()
-        ,
+    )
+    ,
+    newImage('lamp',"lamp.jpeg").size(200,200).center()
+    ,
+    newScale("scale", "1","2","3","4","5","6","7")
+        .labelsPosition("top")
+        .keys()
+        .before(newText("scale_left", "hiç tipik değil").css("margin-left", "1em").css("margin-top", "2.5em"))
+        .after(newText("scale_right", "fazlasıyla tipik").css("margin-right", "1em").css("margin-top", "2.5em"))
+        .center()
+        .bold()
+        .css("margin", "10pt")
+        .cssContainer("border", "solid 1px black")
+        .log()
+        .print()
+    ,
     newCanvas("instr-page", 600, 550)
         .add(100, 20, newImage("rutgers.jpg").size("60%", "auto"))
         .add(0, 150, getText("instr-body"))
         .add(0, 300, getImage('lamp'))
         .add(0, 500, getScale("scale"))
         .cssContainer(pageCss)
-        .print(),
-    newText("<p>").print(),
+        .print()
+    ,
+    newText("<p>").print()
+    ,
     newButton("agree", "Deneye Başlamak için Tıklayınız").bold().css(buttonCss).print().wait()
 )
 
@@ -106,26 +107,30 @@ Template("NormingDataSource.csv", (row) =>
     newTrial(
         "ratings",
 
-        defaultText.center(),
+        defaultText.center()
+        ,
+
         newImage("Image", row.Image1)
             .center()
-            .size((row.width / row.height) * 200, 200),
-        //.print()
-        newText("Question", "Bu, " + row.Noun_DE + " için ne kadar tipik?")
+            .size((row.width / row.height) * 200, 200)
+        ,
+
+        newText("Question", "Bu, bir " + row.Noun_TR + " için ne kadar tipik?")
             .center()
             .css("font-size", "14pt")
-            .css("margin","1.5em"),
-        //.print()
+            .css("margin","1.5em")
+        ,
 
-        // Skala generieren
         newText("scale_left", "hiç tipik değil")
             .css("margin-left", "1em")
             .css("margin-top", "2.5em")
         ,
+
         newText("scale_right", "fazlasıyla tipik")
             .css("margin-right", "1em")
             .css("margin-top", "2.5em")
         ,
+
         newScale("scale", "1","2","3","4","5","6","7")
             .labelsPosition("top")
             .keys()
@@ -139,12 +144,12 @@ Template("NormingDataSource.csv", (row) =>
             .print()
         ,
 
-
         newCanvas("Rating", 800, 500)
             .add("center at 50%", "middle at 0%", getImage("Image"))
             .add("center at 50%", "middle at 30%", getText("Question"))
             .add("center at 50%", "middle at 40%", getScale("scale"))
-            .print("center at 50vw", "middle at 50vh"),
+            .print("center at 50vw", "middle at 50vh")
+        ,
 
         getScale("scale").wait(),
 
@@ -152,7 +157,7 @@ Template("NormingDataSource.csv", (row) =>
         newTimer("wait500", 500).start().wait()
     )
     .log("Item", row.Item)
-    .log("Noun", row.Noun_DE)
+    .log("Noun", row.Noun_TR)
     .log("Condition", row.Condition)
 )
 ,

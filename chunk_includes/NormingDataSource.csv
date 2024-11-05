@@ -1,4 +1,4 @@
-﻿Item,Type,Group,Condition,Image1,width,height,Category_DE,Noun_DE,Category_EN,Noun_EN,Category_TR, Noun_TR
+﻿Item,Type,Group,Condition,Image1,width,height,Category_DE,Noun_DE,Category_EN,Noun_EN,Category_TR,Noun_TR
 1,critical,A,1,cake1.jpeg,225,225,Backwaren,einen Kuchen,baked goods,cake, unlu mamül, kek
 1,critical,B,2,cake2.jpeg,300,300,Backwaren,einen Kuchen,baked goods,cake, unlu mamül, kek
 2,critical,B,1,cookie1.jpeg,300,300,Backwaren,einen Keks,baked goods,cookie, unlu mamül, kurabiye

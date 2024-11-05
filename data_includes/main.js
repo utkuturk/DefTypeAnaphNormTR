@@ -47,12 +47,12 @@ newTrial(
     newText(
         "consent-body",
         "<center><b>Deney Onay Formu</b></center>" +
-        "<p>Lütfen <a target='_blank' rel='noopener noreferrer' href='https://utkuturk.com/files/web_consent.pdf'>Bu linke</a> tıklayarak onay formunu indirip inceleyiniz. Bu onay formunu okuyup bu çalışmaya katılmayı kabul ediyorsanız, aşağıdaki 'Kabul Ediyorum' butonuna tıklayın. Bu çalışmaya katılmayı kabul etmiyorsanız, sekmeyi kapatarak bu çalışmadan çıkabilirsiniz. Deney sırasında istediğiniz zaman sekmeyi kapatarak deneyden çıkabilirsiniz. Eğer deneyi tamamlamadan çıkarsanız, zamanınız için herhangi bir ödeme yapılmayacaktır. Herhangi bir sorunla karşılaşırsanız, lütfen bizimle e-posta yoluyla iletişime geçmekten çekinmeyin." +
-        "<br><br><b> Araştırmacılar:</b> <br>Yağmur Sağ<br>University of Rutgers <i> (yagmursag@gmail.com)</i> ,<br>Utku Turk, University of Maryland, College Park <i> (utkuturk@umd.edu)</i>"
+        "<p>Lütfen <a target='_blank' rel='noopener noreferrer' href='https://utkuturk.com/files/web_consent.pdf'>bu linke</a> tıklayarak onay formunu indirip inceleyiniz. Bu onay formunu okuyup bu çalışmaya katılmayı kabul ediyorsanız, aşağıdaki 'Kabul Ediyorum' butonuna tıklayın. Bu çalışmaya katılmayı kabul etmiyorsanız, sekmeyi kapatarak bu çalışmadan çıkabilirsiniz. Deney sırasında istediğiniz zaman sekmeyi kapatarak deneyden çıkabilirsiniz. Eğer deneyi tamamlamadan çıkarsanız, zamanınız için herhangi bir ödeme yapılmayacaktır. Herhangi bir sorunla karşılaşırsanız, lütfen bizimle e-posta yoluyla iletişime geçmekten çekinmeyin." +
+        "<br><br><b> Araştırmacılar:</b> <br>Yağmur Sağ, University of Rutgers <i> (yagmursag@gmail.com)</i> ,<br>Utku Turk, University of Maryland, College Park <i> (utkuturk@umd.edu)</i>"
     ),
-    newCanvas("consent-page", 1500, 400)
+    newCanvas("consent-page", 600, 400)
         .add(100, 20, newImage("rutgers.jpg").size("60%", "auto"))
-        .add(0, 120, getText("consent-body"))
+        .add(0, 150, getText("consent-body"))
         .cssContainer(pageCss)
         .print(),
     newText("<p>").print(),
@@ -75,11 +75,11 @@ newTrial(
         .after(newText("gayet tipik"))
         .print()
         .center(),
-    newCanvas("instr-page", 1500, 400)
+    newCanvas("instr-page", 600, 550)
         .add(100, 20, newImage("rutgers.jpg").size("60%", "auto"))
-        .add(0, 120, getText("instr-body"))
-        .add(0, 250, getImage('lamp'))
-        .add(0, 450, getScale("scale"))
+        .add(0, 150, getText("instr-body"))
+        .add(0, 300, getImage('lamp'))
+        .add(0, 500, getScale("scale"))
         .cssContainer(pageCss)
         .print(),
     newText("<p>").print(),
@@ -97,22 +97,39 @@ Template("NormingDataSource.csv", (row) =>
             .center()
             .size((row.width / row.height) * 200, 200),
         //.print()
-        newText("Question", "Bu, " + row.Noun_DE + " için ne kadar tipik?"),
+        newText("Question", "Bu, " + row.Noun_DE + " için ne kadar tipik?")
+            .center()
+            .css("font-size", "14pt")
+            .css("margin","1.5em"),
         //.print()
 
-        newScale("scale", "0", "1", "2", "3", "4", "5", "6", "7")
+        // Skala generieren
+        newText("scale_left", "hiç tipik değil")
+            .css("margin-left", "1em")
+            .css("margin-top", "2.5em")
+        ,
+        newText("scale_right", "fazlasıyla tipik")
+            .css("margin-right", "1em")
+            .css("margin-top", "2.5em")
+        ,
+        newScale("7pt", "1","2","3","4","5","6","7")
             .labelsPosition("top")
-            .before(newText("tipik değil"))
-            .after(newText("gayet tipik"))
+            .keys()
+            .before(getText("scale_left"))
+            .after(getText("scale_right"))
             .center()
-            .log(),
-        //.print()
-        //.wait()
+            .bold()
+            .css("margin", "10pt")
+            .cssContainer("border", "solid 1px black")
+            .log()
+            .print()
+        ,
+
 
         newCanvas("Rating", 800, 500)
             .add("center at 50%", "middle at 0%", getImage("Image"))
             .add("center at 50%", "middle at 30%", getText("Question"))
-            .add("center at 50%", "middle at 40%", getScale("scale"))
+            .add("center at 50%", "middle at 40%", getScale("7pt"))
             .print("center at 50vw", "middle at 50vh"),
 
         getScale("scale").wait(),

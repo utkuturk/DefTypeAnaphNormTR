@@ -6,7 +6,7 @@
 3,critical,A,1,bread1.jpeg,300,168,Backwaren,ein Brot,baked goods,bread, unlu mamül, ekmek
 3,critical,B,2,bread2.jpeg,300,168,Backwaren,ein Brot,baked goods,bread, unlu mamül, ekmek
 4,critical,B,1,car1.jpeg,300,300,Fahrzeuge,ein Auto,vehicles,car, araç, araba
-4,critical,A,2,car2.jpeg,500,300,Fahrzeuge,ein Auto,vehicles,car, araç, araba
+4,critical,A,2,car2.jpeg,300,300,Fahrzeuge,ein Auto,vehicles,car, araç, araba
 5,critical,A,1,truck1.jpeg,259,194,Fahrzeuge,einen Laster,vehicles,truck, araç, kamyon
 5,critical,B,2,truck2.jpeg,259,194,Fahrzeuge,einen Laster,vehicles,truck, araç, kamyon
 6,critical,B,1,bus1.jpeg,276,183,Fahrzeuge,einen Reisebus,vehicles,bus, araç, otobüs

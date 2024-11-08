@@ -1,9 +1,12 @@
-
 PennController.ResetPrefix(null)
 
 PreloadZip("https://files.lab.florianschwarz.net/ibexfiles/StimulusArchive/DefTypAnaph.zip");
 
 DebugOff()
+
+
+var progressBarText = "Deney Süreci";
+const PROGRESS_SIZE = { w: 300, h: 20 };
 
 var pageCss = {
     overflow: "auto",
@@ -38,7 +41,7 @@ Header(
 .log( "PROLIFIC_ID" , GetURLParameter("id") )
 ,
 
-Sequence("consent", "instructions", randomize("ratings"), SendResults(), "end")
+Sequence("consent", "instructions", "exp-start", randomize("ratings"), SendResults(), "end")
 
 ,
 
@@ -88,19 +91,49 @@ newTrial(
         .log()
         .print()
     ,
-    newCanvas("instr-page", 600, 550)
+    newCanvas("instr-page", 600, 600)
         .add(100, 20, newImage("rutgers.jpg").size("60%", "auto"))
         .add(0, 150, getText("instr-body"))
-        .add(200, 300, getImage('lamp'))
-        .add(100, 500, getScale("scale"))
+        .add(180, 300, getImage('lamp'))
+        .add(20, 500, getScale("scale"))
         .cssContainer(pageCss)
         .print()
     ,
     newText("<p>").print()
     ,
-    newButton("agree", "Deneye Başlamak için Tıklayınız").bold().css(buttonCss).print().wait()
+    newButton("agree", "Devam etmek için Tıklayınız").bold().css(buttonCss).print().wait()
 )
 
+,
+
+
+newTrial(
+    "exp-start"
+    ,
+    fullscreen()
+    ,
+    newText("exp-start-title", "Deneye Başlamak İçin Hazır Mısınız?")
+        .bold()
+    ,
+    newText(
+        "exp-start-body",
+        "<p>Devam etmeden önce, lütfen çok gürültü olmayan ve dikkatinizi toparlayabileceğiniz bir ortamda olduğunuzdan emin olun." +
+        "<p>Hazır olduğunuzda deneye başlayabilirsiniz."
+    )
+    ,
+    newCanvas("start-page", 1500, 300)
+        .add(100, 20, newImage("rutgers.jpg").size("60%", "auto"))
+        .add(0, 150, getText("exp-start-title"))
+        .add(0, 180, getText("exp-start-body"))
+        .cssContainer(pageCss)
+        .print()
+    ,
+    newText("<p>").print()
+    ,
+    newButton("Deneye başlamak için Tıklayınız").bold().css(buttonCss).print().wait()
+)
+
+,
 
 // Experimental trial
 Template("NormingDataSource.csv", (row) =>
@@ -163,20 +196,23 @@ Template("NormingDataSource.csv", (row) =>
 ,
   // Final screen
 newTrial(
-    "end",
-    newText("Katıldığınız için teşekkür ederiz!!").center().print(),
-    // Bu bağlantı bir yer tutucudur: Katılımcı havuzlama platformunuz tarafından sağlanan URL ile değiştirin
+    "end"
+    ,
+    exitFullscreen()
+    ,
+    newText("Katıldığınız için teşekkür ederiz!").center().print()
+    ,
     newText(
-        "<p><a href='https://app.prolific.co/submissions/complete?cc=15DEE77B' target='_blank'>Katılımınızı Prolific'te onaylamak için buraya tıklayın!</a></p>"
+        "<p><a href='https://google.com' target='_blank'>Katılımınızı Prolific'te onaylamak için buraya tıklayın!</a></p>"
     )
         .center()
-        .print(),
+        .print()
+    ,
     newText(
         "<p>Bu bağlantı yeni bir pencere açar ve sizi Prolific'e geri yönlendirir. Katılımınız Prolific'te onaylandıktan sonra, bu pencereyi kapatabilirsiniz.</p>"
     )
         .center()
-        .print(),
-
-    // Hile: bu denemede sonsuza kadar kalın (sekme kapatılana kadar)
+        .print()
+    ,
     newButton().wait()
 );

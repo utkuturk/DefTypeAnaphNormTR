@@ -1,6 +1,6 @@
 PennController.ResetPrefix(null)
 
-PreloadZip("https://files.lab.florianschwarz.net/ibexfiles/StimulusArchive/DefTypAnaph.zip");
+// PreloadZip("https://files.lab.florianschwarz.net/ibexfiles/StimulusArchive/DefTypAnaph.zip");
 
 DebugOff()
 

@@ -50,8 +50,8 @@ Header().log("PROLIFIC_ID", GetURLParameter("id")),
     newText(
       "consent-body",
       "<center><b>Deney Onay Formu</b></center>" +
-        "<p>Lütfen <a target='_blank' rel='noopener noreferrer' href='https://utkuturk.com/files/web_consent.pdf'>bu linke</a> tıklayarak onay formunu indirip inceleyiniz. Bu onay formunu okuyup bu çalışmaya katılmayı kabul ediyorsanız, aşağıdaki 'Kabul Ediyorum' butonuna tıklayın. Bu çalışmaya katılmayı kabul etmiyorsanız, sekmeyi kapatarak bu çalışmadan çıkabilirsiniz. Deney sırasında istediğiniz zaman sekmeyi kapatarak deneyden çıkabilirsiniz. Eğer deneyi tamamlamadan çıkarsanız, zamanınız için herhangi bir ödeme yapılmayacaktır. Herhangi bir sorunla karşılaşırsanız, lütfen bizimle e-posta yoluyla iletişime geçmekten çekinmeyin." +
-        "<br><br><b> Araştırmacılar:</b> <br>Yağmur Sağ, University of Rutgers <i> (yagmursag@gmail.com)</i> ,<br>Utku Turk, University of Maryland, College Park <i> (utkuturk@umd.edu)</i>"
+        "<p>Lütfen <a target='_blank' rel='noopener noreferrer' href='https://utkuturk.com/files/web_consent_tr.pdf'>bu linke</a> tıklayarak onay formunu indirip inceleyiniz. Bu onay formunu okuyup bu çalışmaya katılmayı kabul ediyorsanız, aşağıdaki 'Kabul Ediyorum' butonuna tıklayın. Bu çalışmaya katılmayı kabul etmiyorsanız, sekmeyi kapatarak bu çalışmadan çıkabilirsiniz. Deney sırasında istediğiniz zaman sekmeyi kapatarak deneyden çıkabilirsiniz. Eğer deneyi tamamlamadan çıkarsanız, zamanınız için herhangi bir ödeme yapılmayacaktır. Herhangi bir sorunla karşılaşırsanız, lütfen bizimle e-posta yoluyla iletişime geçmekten çekinmeyin." +
+        "<br><br><b> Araştırmacılar:</b> <br>Yağmur Sağ Parvardeh, University of Rutgers <i> (yagmursag@gmail.com)</i> <br>Dorothy Ahn, University of Rutgers"
     ),
     newCanvas("consent-page", 600, 400)
       .add(100, 20, newImage("rutgers.jpg").size("60%", "auto"))
@@ -66,10 +66,10 @@ Header().log("PROLIFIC_ID", GetURLParameter("id")),
     newText(
       "instr-body",
       "Merhaba!" +
-        "<p> Bu deneyde sizden gösterilen nesnelerin ne kadar tipik olduğunu değerlendirmeniz istenmektedir.</p>" +
-        "<p> Örneğin, aşağıdaki resim size gösterildikten sonra bir lamba için ne kadar tipik olduğu sorulabilir:</p>"
+        "<p> Bu çalışmada sizden gösterilen nesnelerin ne kadar tipik olduğunu değerlendirmeniz istenmektedir.</p>" +
+        "<p> Örneğin, aşağıdaki resim size gösterildikten sonra bir lamba için ne kadar tipik olduğu sorulabilir. Bu sorulara olabildiğınce hızlı cevap veriniz. 30 saniyeden fazla beklerseniz, bir sonraki nesneye otomatik olarak ilerlenecektir. </p>"
     ),
-    newImage("lamp", "lamp.jpeg").size(200, 200).center(),
+    newImage("lamp", "lamp.jpeg").size("20%", "auto").center(),
     newScale("scale", "1", "2", "3", "4", "5", "6", "7")
       .labelsPosition("top")
       .keys()
@@ -92,7 +92,7 @@ Header().log("PROLIFIC_ID", GetURLParameter("id")),
     newCanvas("instr-page", 600, 600)
       .add(100, 20, newImage("rutgers.jpg").size("60%", "auto"))
       .add(0, 150, getText("instr-body"))
-      .add(180, 300, getImage("lamp"))
+      .add(230, 300, getImage("lamp"))
       .add(20, 500, getScale("scale"))
       .cssContainer(pageCss)
       .print(),
@@ -162,18 +162,25 @@ Header().log("PROLIFIC_ID", GetURLParameter("id")),
         .cssContainer("border", "solid 1px black")
         .log()
         .print(),
+      newTimer("hurry", 30000).start(),
       newCanvas("Rating", 800, 500)
         .add("center at 50%", "middle at 0%", getImage("Image"))
         .add("center at 50%", "middle at 30%", getText("Question"))
         .add("center at 50%", "middle at 45%", getScale("scale"))
         .print("center at 50vw", "middle at 50vh"),
-      getScale("scale").wait(),
-
+      getScale("scale").callback(getTimer("hurry").stop()),
+      getTimer("hurry").wait(),
+      newTimer("wait200", 200).start().wait(),
       clear(),
       newTimer("wait500", 500).start().wait()
     )
       .log("Item", row.Item)
-      .log("Noun", row.Noun_TR)
+      .log("Noun_TR", row.Noun_TR)
+      .log("Noun_EN", row.Noun_EN)
+      .log("Category_TR", row.Category_TR)
+      .log("Category_EN", row.Category_EN)
+      .log("Image1", row.Image1)
+      .log("Group", row.Group)
       .log("Condition", row.Condition)
   ),
   // Final screen
@@ -182,7 +189,7 @@ Header().log("PROLIFIC_ID", GetURLParameter("id")),
     exitFullscreen(),
     newText("Katıldığınız için teşekkür ederiz!").center().print(),
     newText(
-      "<p><a href='https://google.com' target='_blank'>Katılımınızı Prolific'te onaylamak için buraya tıklayın!</a></p>"
+      "<p><a href='https://app.prolific.com/submissions/complete?cc=CP3RXK4C' target='_blank'>Katılımınızı Prolific'te onaylamak için buraya tıklayın!</a></p>"
     )
       .center()
       .print(),

@@ -1,0 +1,170 @@
+---
+title: "Norming Analysis for Turkish Materials"
+author: "Utku Turk"
+format: html
+execute:
+  echo: true
+  warning: false
+  error: false
+  cache: true
+figures:
+  fig-width: 6
+  fig-height: 4
+  fig-align: center
+  fig-format: png
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+# function for reading PCIBEX
+read.pcibex <- function(filepath, auto.colnames = TRUE, fun.col = function(col, cols) {
+                            cols[cols == col] <- paste(col, "Ibex", sep = ".")
+                            return(cols)
+                        }) {
+    n.cols <- max(count.fields(filepath, sep = ",", quote = NULL), na.rm = TRUE)
+    if (auto.colnames) {
+        cols <- c()
+        con <- file(filepath, "r")
+        while (TRUE) {
+            line <- readLines(con, n = 1, warn = FALSE)
+            if (length(line) == 0) {
+                break
+            }
+            m <- regmatches(line, regexec("^# (\\d+)\\. (.+)\\.$", line))[[1]]
+            if (length(m) == 3) {
+                index <- as.numeric(m[2])
+                value <- m[3]
+                if (index < length(cols)) {
+                    cols <- c()
+                }
+                if (is.function(fun.col)) {
+                    cols <- fun.col(value, cols)
+                }
+                cols[index] <- value
+                if (index == n.cols) {
+                    break
+                }
+            }
+        }
+        close(con)
+        return(read.csv(filepath, comment.char = "#", header = FALSE, col.names = cols))
+    } else {
+        return(read.csv(filepath, comment.char = "#", header = FALSE, col.names = seq(1:n.cols)))
+    }
+}
+```
+
+
+```{r}
+# read the data
+Data <- read.pcibex("../results_NOV23.csv")
+
+# janitor clean names
+Data <- janitor::clean_names(Data)
+
+Data$subject <- with(Data, paste(results_reception_time, md5_hash_of_participant_s_ip_address)) %>%
+    as.factor() %>%
+    as.integer() %>%
+    sprintf("S[%s]", .) %>%
+    as.factor()
+
+Data <- Data %>% dplyr::select(-results_reception_time, -md5_hash_of_participant_s_ip_address)
+
+TypData <- Data %>%
+    filter(penn_element_type == "Scale")
+
+
+
+
+TypData$value <- as.numeric(as.character(TypData$value))
+
+length(unique(TypData$subject))
+
+```
+
+
+```{r}
+# Show how many NAs in condition column
+sum(is.na(TypData$condition))
+# Delete rows with NA
+TypData <- TypData %>% filter(!is.na(condition))
+
+TypData %>%
+    group_by(condition) %>%
+    summarize(Rating = mean(value), Min = min(value), Max = max(value), n = length(value))
+```
+
+```{r}
+bysubject <- TypData %>%
+    group_by(subject, condition) %>%
+    summarize(value = mean(value))
+
+bysubject$condition <- as.factor(bysubject$condition)
+
+ggplot(bysubject, aes(subject, value, color = condition)) +
+    geom_point() +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust = 1)) +
+    scale_color_manual(labels = c("1" = "Typical", "2" = "Not Typical"), values = c("1" = "red", "2" = "blue")) +
+    theme(legend.position = "top") +
+    xlab("Item") +
+    # add y breaks and ticks
+    scale_y_continuous(breaks = seq(0, 7, 1))
+
+# S[7] misunderstood the task
+# S[15] and S[20] is just bad
+```
+
+
+```{r}
+# delete  S[15] and S[20]
+TypData <- TypData %>% filter(subject != "S[15]", subject != "S[20]", subject != "S[6]")
+
+# for S[7], given an noun_en and condition, switch the values
+TypData <- TypData %>%
+    mutate(value = case_when(subject == "S[7]" ~ case_when(condition == 1 ~ 7 - value, condition == 2 ~ 7 - value),
+                             TRUE ~ value))
+
+TypDataItem <- TypData %>%
+    group_by(item, noun_en, condition) %>%
+    summarize(Rating = mean(value), n = length(value))
+
+```
+
+
+```{r}
+TypDataItem$condition <- as.factor(TypDataItem$condition)
+
+ggplot(TypDataItem, aes(paste(item, noun_en), Rating, color = condition)) +
+    geom_point() +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust = 1)) +
+    scale_color_manual(labels = c("1" = "Typical", "2" = "Not Typical"), values = c("1" = "red", "2" = "blue")) +
+    theme(legend.position = "top") +
+    xlab("Item") +
+    # add y breaks and ticks
+    scale_y_continuous(breaks = seq(0, 7, 1))
+
+```
+
+
+```{r}
+TypDataItem %>%
+    select(c("item", "condition", "Rating")) %>%
+    pivot_wider(names_from=condition, values_from = Rating) %>%
+    mutate(Diff = `1`-`2`)%>%
+   group_by()%>%
+    summarize(mean(`1`), mean(`2`),min(`1`), min(`2`), max(`1`), max(`2`), mean(Diff), min(Diff), max(Diff), min(Diff))
+```
+
+
+```{r}
+TypDataItem %>%
+    select(c("item", "condition", "Rating")) %>%
+    pivot_wider(names_from = condition, values_from = Rating) %>%
+    mutate(Diff = `1` - `2`)
+```
